@@ -9,8 +9,6 @@
 
 #START IMPORTING LIBRARIES
 #===================================================================================================================================================
-    #MAINSCRIPTS
-from MainScout3 import MainScout3_Selenium
     #REQUESTS
 import requests
     #JSON
@@ -115,6 +113,7 @@ def availability_status_checker(parsed_availability_dictionary):
 def get_parse_print_raw_data (all_selenium_guest_session_cookies):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36'}
     dates_dictionary = create_dates_inquiry_dictionary()
+    all_parsed_data_dictionary = []
 
     try:
         for selenium_cookies in range(len(all_selenium_guest_session_cookies)):
@@ -127,20 +126,22 @@ def get_parse_print_raw_data (all_selenium_guest_session_cookies):
             availability_status = availability_status_checker(parsed_availability_dictionary)
             if availability_status == True:
                 print(parsed_availability_dictionary)
+                all_parsed_data_dictionary.append(parsed_availability_dictionary)
             else:
                 print('No times or dates available')
             end_time = time.time()
             print("Get requests and parse data runtime: " + str(end_time - start_time))
             print("")
         print("----------------------------------------------------------------------------------------------------------------")
-        time.sleep(59)
+        return all_parsed_data_dictionary
     except:
         print("Error: Cookie expired")
         pass
 #===================================================================================================================================================
     #MAIN EXECUTION // EXECUTE MAIN FUNCTION // FUNCTION
 def MainScout4(all_selenium_guest_sessions):
-    get_parse_print_raw_data(all_selenium_guest_sessions)
+    parsed_availability_dictionary = get_parse_print_raw_data(all_selenium_guest_sessions)
+    return parsed_availability_dictionary
 #===================================================================================================================================================
 #FUNCTION CREATION END
 
