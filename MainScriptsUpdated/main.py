@@ -7,7 +7,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-cred = credentials.Certificate("/Users/partheshpatel/Desktop/deliverscout-firebase-adminsdk-fz84e-455a4eb0be.json")
+cred = credentials.Certificate("C:/Users/Mason/Desktop/DeliverMeScraper/MainScriptsUpdated/deliverscout-firebase-adminsdk-fz84e-455a4eb0be.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL' : 'https://deliverscout.firebaseio.com'
 })
@@ -60,27 +60,28 @@ def MainScout3_Notifications(parsed_availability_dictionary):
     pushSlots(parsed_availability_dictionary)
 
 #Main execution
-dataArray = getData()
+if __name__ == '__main__':
+    dataArray = getData()
 
-x = 0
-while x < 10:
-    try:
-        seleniumSessions = MainScout2(dataArray)
-        x = x+1
-    except:
-        x = 10
-        break
-    y = 0
-    while y < 180:
+    x = 0
+    while x < 10:
         try:
-            parsed_availability_dictionary = MainScout3_Requests(seleniumSessions)
-            y = y+1
+            seleniumSessions = MainScout2(dataArray)
+            x = x+1
         except:
-            y = 180
+            x = 10
             break
-            
-        finally:
-            pushSlots(parsed_availability_dictionary)
-            time.sleep(58.5)
+        y = 0
+        while y < 180:
+            try:
+                parsed_availability_dictionary = MainScout3_Requests(seleniumSessions)
+                y = y+1
+            except:
+                y = 180
+                break
+                
+            finally:
+                pushSlots(parsed_availability_dictionary)
+                time.sleep(58.5)
 
 

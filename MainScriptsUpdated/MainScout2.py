@@ -40,7 +40,7 @@ def selenium_setup():
     chrome_options.add_experimental_option('excludeSwitches', ['enable-automation']) 
     chrome_options.add_experimental_option('useAutomationExtension', False)
         #SET SELENIUM CHROME DRIVER CAPABILITIES/OPTIONS/PATH HERE
-    browser_driver = webdriver.Chrome(desired_capabilities=chrome_capabilities, options=chrome_options, executable_path=r'/Users/partheshpatel/Desktop/DeliverMe/chromedriver')
+    browser_driver = webdriver.Chrome(desired_capabilities=chrome_capabilities, options=chrome_options, executable_path=r'C:\Users\Mason\Desktop\DeliverMeScraper\chromedriver.exe')
         #RETURN BROWSER
     return browser_driver
 
